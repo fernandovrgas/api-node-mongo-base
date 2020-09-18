@@ -10,3 +10,14 @@ API desenvolvida em ambiente de estudo. Tecnologias utilizadas:
 * **.editorconfig**: Referente a um pligin utilizado no VS Code para ajudar nos padroes de codificação.
 * **mongoose-paginate**: biblioteca responsável por permitir a paginação no mongoose
 * **cors**: biblioteca responsável por permitir acesso externo para a API
+
+## Inicializando o projeto.
+A inicialização do projeto é muito simples uma vez que no local onde o projeto vai ser inicializado tenha o NPM, Node.js e MongoDB instalado.
+Considerando isso como verdade, após clonar o projeto basta:
+
+* Rodar o comando:
+```
+npm start
+```
+
+Uma vez executado este comando espera-se que todos os pacotes e dependencias sejam instalados e o servidor já seja inicializado através do Nodemon
