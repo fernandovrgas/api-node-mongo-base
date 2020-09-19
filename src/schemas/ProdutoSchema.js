@@ -1,8 +1,9 @@
-const mongoose = require('mongoose')
-	  mongoosePaginate = require('mongoose-paginate')
-;
+import { Schema, model } from 'mongoose';
+import mongoosePaginate from 'mongoose-paginate';
 
-const ProdutoSchema = new mongoose.Schema({
+import config from '../../config/config';
+
+const ProdutoSchema = new Schema({
     nome: {
         type: String,
         required: true
@@ -23,11 +24,12 @@ const ProdutoSchema = new mongoose.Schema({
 	},
 	status: {
 		type: String,
-		required: true
+		required: true,
+		enum: config.enums.status
 	}
 });
 
 // adicionando plugin do mongoose paginate no schema do produto
 ProdutoSchema.plugin(mongoosePaginate);
 
-mongoose.model('Produto', ProdutoSchema);
+export default model('Produto', ProdutoSchema);

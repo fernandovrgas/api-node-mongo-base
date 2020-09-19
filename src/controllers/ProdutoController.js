@@ -1,13 +1,11 @@
-const mongoose = require('mongoose'),
-	  Produto = mongoose.model('Produto')
-;
+import { Produto } from '../schemas';
 
 module.exports = {
 	// lista
 	async index(req, res) {
 		// usando desestruturação para pegar o param page do objeto req.query. Se não existir valor no req o padrão é 1
-		const { page = 1 } = req.query;
-			  produtos = await Produto.paginate({}, { page, limit: 10 })
+		const { page = 1 } = req.query,
+			produtos = await Produto.paginate({}, { page, limit: 10 })
 		;
 
 		return res.json(produtos);

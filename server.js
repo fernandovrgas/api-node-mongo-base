@@ -1,22 +1,26 @@
-const cors = require('cors'),
-	  express = require('express'),
-      mongoose = require('mongoose'),
-      requireDir = require('require-dir'),
-      app = express()
-;
+import cors from 'cors';
+import express from 'express';
+import mongoose from 'mongoose';
+import config from './config/config';
+import { produtos } from './src/routes';
 
-app.use(express.json());
-app.use(cors()); //deste modo todos os dominios ou qualquer dominio pode requisitar dados externamente. Mas é possivel configurar apenas dominios específicos.
+const server = express();
 
 // iniciando o banco de dados
-mongoose.connect('mongodb://localhost:27017/node-api-mongo',
-    { useNewUrlParser: true, useUnifiedTopology: true }
+mongoose.connect(config.database.urlConnection, {
+	useNewUrlParser: true,
+	useUnifiedTopology: true
+}
 );
 
-// importando os models da aplicação
-requireDir('./src/models/');
+server.use(express.json());
+server.use(cors()); //deste modo todos os dominios ou qualquer dominio pode requisitar dados externamente. Mas é possivel configurar apenas dominios específicos.
+
+mongoose.Promise = global.Promise;
 
 // rotas
-app.use('/api', require('./src/routes'));
+server.use('/api', produtos);
 
-app.listen(3001);
+server.listen(config.server.port);
+
+export default server;
